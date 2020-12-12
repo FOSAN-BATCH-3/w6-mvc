@@ -2,6 +2,10 @@ const todoModel = require('../Model/todoModel.js');
 const todoView = require('../View/todoView.js');
 
 class todoController{
+    static help(){
+        todoView.lihatHelp()
+    }
+
     static list(){
         todoModel.lookData(function(data){
             todoView.lihatPesan(data)
