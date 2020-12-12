@@ -25,6 +25,9 @@ switch (request){
     case 'uncompleted':
         todoController.uncompleted(parameter[0])
     break;
+    case 'completeList':
+        todoController.completeList()
+    break;
     default :
     console.log ('error bosq')
 }

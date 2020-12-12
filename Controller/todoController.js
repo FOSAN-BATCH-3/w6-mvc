@@ -8,14 +8,14 @@ class todoController{
 
     static list(){
         todoModel.lookData(function(data){
-            todoView.lihatPesan(data)
+            todoView.lihatPesan1(data)
         })
     }
     static find(p){
         todoModel.lookData(function(data){
             for (let i = 0; i < data.length; i++){
                 if (data[i].task_id == p){
-                    todoView.lihatPesan(data[i])
+                    todoView.lihatPesan2(data[i])
                 }
             }
         })
@@ -70,6 +70,19 @@ class todoController{
         }
     })
     }
+    static completeList(){
+        todoModel.lookData(function(data){
+            let cl = []
+            for (let i = 0; i < data.length; i++){
+                if (data[i].status == 'v'){
+                cl.push(data[i])
+                    todoView.lihatPesan1(cl);
+                } 
+                }
+                
+        })
+    }
+    
 }
 
 module.exports = todoController;
