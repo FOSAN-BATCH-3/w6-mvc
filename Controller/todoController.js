@@ -1,6 +1,7 @@
 const todoModel = require('../Model/todoModel.js');
 const todoView = require('../View/todoView.js');
 
+
 class todoController{
     static help(){
         todoView.lihatHelp()
@@ -8,7 +9,11 @@ class todoController{
 
     static list(){
         todoModel.lookData(function(data){
-            todoView.lihatPesan1(data)
+            // console.log (data)
+            if (data = []){
+                todoView.lihatPesan0()
+            }else{
+            todoView.lihatPesan1(data)}
         })
     }
     static find(p){
@@ -22,15 +27,23 @@ class todoController{
     }
     static add (p){
         todoModel.lookData(function(data){
+            if (data == ""){
+                console.log(data,'<<<')
+                data =[{task_id: 1, task_content: p, status: 'x'}]
+                todoModel.saveData(data, function(pesan){
+                    todoView.lihatPesan(pesan);
+            })
+            }else if (data !== []){
             let y = data.length -1
             let yy = data[y].task_id
                 data.push({task_id:yy += 1, task_content: p, status: 'x'})
                 todoModel.saveData(data, function(pesan){
                 todoView.lihatPesan(pesan);
             })
-            
+            }
         })
     }
+
     static delete (p){
         todoModel.lookData(function(data){
             for (let i = 0; i < data.length; i++){

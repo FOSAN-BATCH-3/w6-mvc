@@ -7,7 +7,11 @@ class todoModel {
             console.log(err)
         }
         else{
+            if (data == ""){
+                cb(data)
+            }else{
             cb(JSON.parse(data));
+            }
         }
     })
     }
