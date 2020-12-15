@@ -4,13 +4,13 @@ const parameter = process.argv.slice(3);
 const todoController = require('./controler/todoControler');
 switch(request){
     case 'help':
-        todoController
+        todoController.help()
     break
     case 'list':
         todoController.list()
     break
     case 'add':
-        todoController
+        todoController.add(parameter)
     break
     case 'find':
         todoController

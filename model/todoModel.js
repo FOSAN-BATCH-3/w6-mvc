@@ -1,11 +1,12 @@
 const fs = require ('fs');
+const TodoView = require('../view/todoView');
 
 
 class TodoModel{
     constructor(id, task, status){
         this.id = id;
         this.task = task;
-        this.status = status;
+        this.status = status || 'x';
     }
     static list(cb){
         fs.readFile('./todo.json', 'utf8', (err, data) =>{
@@ -16,21 +17,15 @@ class TodoModel{
             }
         })
     }
-    static saveTodo(data, cb){
-        fs.writeFile('./todo.json', JSON.stringify (data, null, 2), (err, data) =>{
-            if(err){
-                console.log(err);
-            }else{
-                cb('Sukses!')
-            }
-        })
+    static saveTodo(data){
+        let save = JSON.stringify (data, null, 2)
+        fs.writeFileSync('./todo.json', save) 
     }
-    static add(q, w, e){
-        this.list(function(data){
-            data.push({id : q, task: w, status: e});
-            this.saveTodo(data, function(pesan){
-                viewTodo.cek(pesan)
-            })
+    static add(q, cb){
+        TodoModel.list(data =>{
+            data.push(new TodoModel(data[data.length -1].id + 1, q[0]));
+            TodoModel.saveTodo(data)
+            cb(q[0])
         })
     }
 }
