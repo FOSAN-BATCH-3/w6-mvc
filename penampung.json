@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "task": "berenang",
+    "status": "v"
+  },
+  {
+    "id": 2,
+    "task": "main game",
+    "status": "x"
+  },
+  {
+    "id": 3,
+    "task": "nonton korea",
+    "status": "v"
+  },
+  {
+    "id": 4,
+    "task": "tidur",
+    "status": "x"
+  },
+  {
+    "id": 5,
+    "task": "makan",
+    "status": "x"
+  },
+  {
+    "id": 6,
+    "task": "minum",
+    "status": "x"
+  },
+  {
+    "id": 7,
+    "task": "minu",
+    "status": "x"
+  }
+]
