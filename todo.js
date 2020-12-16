@@ -29,6 +29,7 @@ switch (request)    {
     break;
     case 'viewuncompleted':
         listController.viewUncompleted()
+    break;
     default:
         console.log('goblok')
 }

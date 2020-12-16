@@ -54,6 +54,10 @@ class lihatList {
             console.log(penampung)
         })
     }
+
+    static doubleAdd (task) {
+        console.log(`${task} sudah ada pada list`)
+    }
 }
 
 module.exports = lihatList

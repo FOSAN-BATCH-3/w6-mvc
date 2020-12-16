@@ -11,23 +11,52 @@ class Controller    {
         viewList.helpList ()
     }
     static addContent (task)    {
-        modelList.listTodo (function(data)   {
-            let penampung = 0
-            let flag = false
-            for(let i=0; i<data.length; i++)    {
-               penampung = Math.max(data[i].id)  
-               if (data[i].task==task)  {
-                   flag = true
-               }    
+        modelList.penampung((data)=> {
+            let penanda = 0
+            let penampung3 = 0
+            let penampung1 = []
+            for (let j=0; j<data.length; j++) {
+                penampung3 = Math.max(data[j].id)  
+                if (data[j].task==task) {
+                    penanda = 1
+                    penampung1 = data[j]
+                    modelList.listTodo((data)=> {
+                        let flag = false
+                        for (let k=0; k<data.length; k++) {
+                            if (data[k].task!=task || data[k].length==0) {
+                                flag = true
+                            }
+                        }
+                        if (flag==true) {
+                            data.push({id: penampung1.id, task: penampung1.task, status: "x"})
+                            modelList.saveData (data)
+                            viewList.addTask (task)
+                        }
+                    })
+                }
             }
-            if (flag===false)   {
-                data.push({id: penampung + 1, task: task, status: "v"})
-                modelList.saveData (data)
-                viewList.addTask (task)
-            } else  {
-                console.log(`${task} sudah ada pada list`)
-            }
-        })    
+            if (penanda==0) {
+                data.push({id: penampung3 + 1, task: task, status: "x"})
+                modelList.savePenampung (data)
+                modelList.listTodo (function(data)   {
+
+                    let flag = false
+                    for(let i=0; i<data.length; i++)    {  
+                       if (data[i].task==task)  {
+                           flag = true
+                       }    
+                    }
+                    if (flag===false)   {
+                        data.push({id: penampung3 + 1, task: task, status: "x"})
+                        modelList.saveData (data)
+                        viewList.addTask (task)
+                    } else  {
+                        viewList.doubleAdd()
+                    }
+                })    
+            } 
+        })
+        
     }
 
     static findContent (nomer)  {
